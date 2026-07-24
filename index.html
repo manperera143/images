@@ -20,6 +20,11 @@
             --text-light: #ffffff;
             --secondary-gradient: linear-gradient(135deg, #0a7b8a 0%, #4db8c4 100%);
             --gold-accent: linear-gradient(135deg, #d4af37 0%, #b8960d 100%);
+            
+            /* Enhanced Section Backgrounds with Subtle SVG Patterns & Elegant Gold Borders */
+            --card-bg: rgba(255, 255, 255, 0.82);
+            --card-border: 2px solid rgba(212, 175, 55, 0.45);
+            --card-shadow: 0 15px 35px rgba(10, 123, 138, 0.12);
         }
 
         body {
@@ -29,23 +34,63 @@
             overflow-x: hidden;
         }
 
-        /* Animated Background */
-        .animated-bg {
+        /* Reusable Section Styling with Subtle Floral Pattern Background */
+        .pattern-card-section {
+            background-color: rgba(255, 255, 255, 0.85);
+            /* Elegant SVG subtle background pattern */
+            background-image: radial-gradient(rgba(212, 175, 55, 0.2) 1px, transparent 1px), radial-gradient(rgba(10, 123, 138, 0.1) 1px, rgba(255, 255, 255, 0.85) 1px);
+            background-size: 40px 40px;
+            background-position: 0 0, 20px 20px;
+            backdrop-filter: blur(12px);
+            border: var(--card-border);
+            border-radius: 20px;
+            padding: 35px 25px;
+            margin-bottom: 30px;
+            box-shadow: var(--card-shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Corner Gold Ornament Accents */
+        .pattern-card-section::before {
+            content: '✨';
+            position: absolute;
+            top: 10px;
+            left: 12px;
+            font-size: 14px;
+            opacity: 0.6;
+        }
+
+        .pattern-card-section::after {
+            content: '✨';
+            position: absolute;
+            bottom: 10px;
+            right: 12px;
+            font-size: 14px;
+            opacity: 0.6;
+        }
+
+        /* Falling Rose Petals Container */
+        .petals-container {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1;
-            background: linear-gradient(45deg, #e8f5f7 25%, #d1e8ec 25%, #d1e8ec 50%, #e8f5f7 50%, #e8f5f7 75%, #d1e8ec 75%, #d1e8ec);
-            background-size: 60px 60px;
-            opacity: 0.3;
-            animation: slide 20s linear infinite;
+            pointer-events: none;
+            z-index: 9999;
+            overflow: hidden;
         }
 
-        @keyframes slide {
-            0% { background-position: 0 0; }
-            100% { background-position: 60px 60px; }
+        .petal {
+            position: absolute;
+            width: 16px;
+            height: 22px;
+            background: radial-gradient(ellipse at 30% 30%, #ff8095 0%, #e63956 70%, #b30024 100%);
+            border-radius: 50% 50% 50% 50% / 80% 80% 20% 20%;
+            opacity: 0.85;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
+            pointer-events: none;
         }
 
         .bubbles {
@@ -56,32 +101,6 @@
             height: 100%;
             z-index: 0;
             pointer-events: none;
-        }
-
-        .bubble {
-            position: absolute;
-            background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.8), rgba(255,255,255,0.1));
-            border-radius: 50%;
-            opacity: 0.3;
-            animation: rise 15s infinite ease-in;
-        }
-
-        @keyframes rise {
-            0% {
-                bottom: -10px;
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.3;
-            }
-            90% {
-                opacity: 0.3;
-            }
-            100% {
-                bottom: 100vh;
-                opacity: 0;
-                transform: translateX(100px);
-            }
         }
 
         .container {
@@ -115,43 +134,16 @@
         }
 
         @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .hero::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+            top: 0; left: 0; right: 0; bottom: 0;
             background: rgba(10, 123, 138, 0.5);
             z-index: 0;
-        }
-
-        .hero::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
-            background-size: 40px 40px;
-            animation: float 20s linear infinite;
-            z-index: 0;
-        }
-
-        @keyframes float {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(-40px, -40px); }
         }
 
         .hero-content {
@@ -167,7 +159,6 @@
             text-transform: uppercase;
             opacity: 0.9;
             margin-bottom: 15px;
-            animation: fadeIn 1s ease-out 0.3s both;
         }
 
         .couple-names {
@@ -175,7 +166,6 @@
             font-weight: 300;
             letter-spacing: 2px;
             margin: 20px 0;
-            animation: fadeIn 1s ease-out 0.5s both;
         }
 
         .decorative-line {
@@ -183,47 +173,15 @@
             height: 2px;
             background: var(--primary-gold);
             margin: 20px auto;
-            animation: expandWidth 0.8s ease-out 0.7s both;
-        }
-
-        @keyframes expandWidth {
-            from { width: 0; }
-            to { width: 60px; }
         }
 
         .wedding-date {
             font-size: 16px;
             letter-spacing: 1px;
             margin: 20px 0;
-            animation: fadeIn 1s ease-out 0.9s both;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
         }
 
         /* Countdown Timer */
-        .countdown-section {
-            background: white;
-            border-radius: 15px;
-            padding: 30px 20px;
-            margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(10, 123, 138, 0.15);
-            animation: slideUp 0.8s ease-out 0.2s both;
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
         .countdown-title {
             text-align: center;
             font-size: 18px;
@@ -241,10 +199,11 @@
         }
 
         .countdown-item {
-            background: linear-gradient(135deg, #e8f5f7 0%, #d1e8ec 100%);
+            background: rgba(255, 255, 255, 0.95);
             padding: 15px;
-            border-radius: 10px;
-            border: 2px solid var(--primary-teal);
+            border-radius: 12px;
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            box-shadow: 0 4px 12px rgba(10, 123, 138, 0.08);
         }
 
         .countdown-number {
@@ -264,7 +223,6 @@
         /* Photo Carousel */
         .carousel-section {
             margin-bottom: 30px;
-            animation: slideUp 0.8s ease-out 0.4s both;
         }
 
         .carousel {
@@ -275,6 +233,7 @@
             overflow: hidden;
             box-shadow: 0 20px 50px rgba(10, 123, 138, 0.2);
             background: #f0f0f0;
+            border: 2px solid rgba(212, 175, 55, 0.4);
         }
 
         .carousel-slide {
@@ -308,7 +267,6 @@
             background: rgba(255,255,255,0.5);
             cursor: pointer;
             transition: all 0.3s ease;
-            border: 2px solid transparent;
         }
 
         .carousel-dot.active {
@@ -317,15 +275,6 @@
         }
 
         /* Schedule Section */
-        .schedule-section {
-            background: white;
-            border-radius: 15px;
-            padding: 30px 20px;
-            margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(10, 123, 138, 0.15);
-            animation: slideUp 0.8s ease-out 0.6s both;
-        }
-
         .section-title {
             font-size: 22px;
             color: var(--primary-teal);
@@ -364,28 +313,19 @@
         }
 
         .timeline-item {
-            margin-bottom: 25px;
+            margin-bottom: 22px;
             position: relative;
-            animation: slideInLeft 0.6s ease-out both;
-            animation-delay: calc(0.1s * var(--item-index));
-        }
-
-        @keyframes slideInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
+            background: rgba(255, 255, 255, 0.7);
+            padding: 12px 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(10, 123, 138, 0.15);
         }
 
         .timeline-item::before {
             content: '';
             position: absolute;
-            left: -36px;
-            top: 2px;
+            left: -37px;
+            top: 15px;
             width: 12px;
             height: 12px;
             border-radius: 50%;
@@ -397,31 +337,23 @@
         .timeline-time {
             font-weight: bold;
             color: var(--primary-teal);
-            font-size: 16px;
+            font-size: 15px;
         }
 
         .timeline-event {
             color: var(--text-dark);
-            margin-top: 5px;
+            margin-top: 4px;
             font-size: 14px;
+            font-weight: 600;
         }
 
         .timeline-venue {
             color: var(--primary-light-blue);
             font-size: 13px;
-            margin-top: 3px;
+            margin-top: 2px;
         }
 
         /* Venue Section */
-        .venue-section {
-            background: white;
-            border-radius: 15px;
-            padding: 30px 20px;
-            margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(10, 123, 138, 0.15);
-            animation: slideUp 0.8s ease-out 0.8s both;
-        }
-
         .venue-grid {
             display: grid;
             grid-template-columns: 1fr;
@@ -429,9 +361,7 @@
         }
 
         @media (min-width: 600px) {
-            .venue-grid {
-                grid-template-columns: 1fr 1fr;
-            }
+            .venue-grid { grid-template-columns: 1fr 1fr; }
         }
 
         .venue-card {
@@ -446,57 +376,26 @@
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
+            background-size: cover;
+            background-position: center;
         }
+
+        .venue-card.church { background-image: url('https://raw.githubusercontent.com/manperera143/images/main/7.png'); }
+        .venue-card.hotel { background-image: url('https://raw.githubusercontent.com/manperera143/images/main/8.png'); }
 
         .venue-card::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-size: cover;
-            background-position: center;
-            opacity: 0.4;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(255, 255, 255, 0.45);
             z-index: 1;
         }
 
-        .venue-card.church::before {
-            background-image: url('https://raw.githubusercontent.com/manperera143/images/main/7.png');
-        }
+        .venue-time { font-weight: bold; color: var(--primary-teal); font-size: 16px; margin-bottom: 8px; }
+        .venue-name { color: var(--primary-teal); font-size: 16px; margin-bottom: 12px; font-weight: 600; }
+        .venue-location { color: var(--primary-teal); font-size: 13px; margin-bottom: 12px; font-weight: bold; }
 
-        .venue-card.hotel::before {
-            background-image: url('https://raw.githubusercontent.com/manperera143/images/main/8.png');
-        }
-
-        .venue-card > * {
-            position: relative;
-            z-index: 2;
-        }
-
-        .venue-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(10, 123, 138, 0.2);
-        }
-
-        .venue-time {
-            font-weight: bold;
-            color: var(--primary-teal);
-            font-size: 16px;
-            margin-bottom: 8px;
-        }
-
-        .venue-name {
-            color: var(--text-dark);
-            font-size: 14px;
-            margin-bottom: 12px;
-        }
-
-        .venue-location {
-            color: var(--primary-light-blue);
-            font-size: 13px;
-            margin-bottom: 12px;
-        }
+        .venue-card > * { position: relative; z-index: 2; }
 
         .map-button {
             display: inline-block;
@@ -507,25 +406,12 @@
             text-decoration: none;
             font-size: 12px;
             transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
+            text-align: center;
         }
 
-        .map-button:hover {
-            background: var(--primary-gold);
-            transform: scale(1.05);
-        }
+        .map-button:hover { background: var(--primary-gold); }
 
         /* Special Features */
-        .features-section {
-            background: white;
-            border-radius: 15px;
-            padding: 30px 20px;
-            margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(10, 123, 138, 0.15);
-            animation: slideUp 0.8s ease-out 1s both;
-        }
-
         .feature-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -533,42 +419,26 @@
         }
 
         .feature-item {
-            background: linear-gradient(135deg, #e8f5f7 0%, #d1e8ec 100%);
-            padding: 15px;
-            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(212, 175, 55, 0.35);
+            padding: 18px 15px;
+            border-radius: 12px;
             text-align: center;
-            animation: pulse 2s ease-in-out infinite;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
         }
 
-        .feature-item:nth-child(2n) {
-            animation-delay: 0.5s;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.02); }
-        }
-
-        .feature-icon {
-            font-size: 24px;
-            margin-bottom: 8px;
-        }
-
-        .feature-text {
-            font-size: 13px;
-            color: var(--text-dark);
-            font-weight: 500;
-        }
+        .feature-icon { font-size: 26px; margin-bottom: 8px; }
+        .feature-text { font-size: 13px; color: var(--text-dark); font-weight: 600; }
 
         /* RSVP Section */
         .rsvp-section {
             background: var(--secondary-gradient);
-            border-radius: 15px;
-            padding: 30px 20px;
+            border-radius: 20px;
+            padding: 35px 25px;
             color: white;
             margin-bottom: 30px;
             box-shadow: 0 20px 50px rgba(10, 123, 138, 0.3);
-            animation: slideUp 0.8s ease-out 1.2s both;
+            border: 2px solid rgba(212, 175, 55, 0.5);
         }
 
         .rsvp-title {
@@ -579,50 +449,22 @@
             letter-spacing: 2px;
         }
 
-        .form-group {
-            margin-bottom: 18px;
-        }
+        .form-group { margin-bottom: 18px; }
+        label { display: block; margin-bottom: 6px; font-size: 14px; font-weight: 500; }
 
-        label {
-            display: block;
-            margin-bottom: 6px;
-            font-size: 14px;
-            font-weight: 500;
-            letter-spacing: 0.5px;
-        }
-
-        input[type="text"],
-        input[type="email"],
-        input[type="tel"],
-        select,
-        textarea {
+        input[type="text"], input[type="email"], input[type="tel"], select, textarea {
             width: 100%;
             padding: 12px;
             border: 2px solid rgba(255,255,255,0.3);
             border-radius: 8px;
             font-family: inherit;
             font-size: 14px;
-            background: rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.15);
             color: white;
-            transition: all 0.3s ease;
         }
 
-        input[type="text"]::placeholder,
-        input[type="email"]::placeholder,
-        input[type="tel"]::placeholder,
-        textarea::placeholder {
-            color: rgba(255,255,255,0.6);
-        }
-
-        input[type="text"]:focus,
-        input[type="email"]:focus,
-        input[type="tel"]:focus,
-        select:focus,
-        textarea:focus {
-            outline: none;
-            border-color: var(--primary-gold);
-            background: rgba(255,255,255,0.2);
-            box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+        input[type="text"]::placeholder, input[type="email"]::placeholder, input[type="tel"]::placeholder, textarea::placeholder {
+            color: rgba(255,255,255,0.7);
         }
 
         select {
@@ -634,29 +476,10 @@
             padding-right: 35px;
         }
 
-        textarea {
-            resize: vertical;
-            min-height: 100px;
-        }
+        textarea { resize: vertical; min-height: 100px; }
 
-        .radio-group {
-            display: flex;
-            gap: 20px;
-            margin-top: 10px;
-        }
-
-        .radio-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        input[type="radio"] {
-            width: 18px;
-            height: 18px;
-            cursor: pointer;
-            accent-color: var(--primary-gold);
-        }
+        .radio-group { display: flex; gap: 20px; margin-top: 10px; }
+        .radio-item { display: flex; items-center; gap: 8px; }
 
         .rsvp-button {
             width: 100%;
@@ -672,199 +495,75 @@
             cursor: pointer;
             transition: all 0.3s ease;
             margin-top: 10px;
-            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
         }
 
-        .rsvp-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4);
-        }
+        .rsvp-button:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4); }
 
-        .rsvp-button:active {
-            transform: translateY(0);
-        }
+        .form-message { text-align: center; padding: 12px; border-radius: 8px; margin-top: 10px; display: none; }
+        .form-message.success { background: rgba(76, 184, 196, 0.3); color: #4db8c4; border: 1px solid #4db8c4; display: block; }
 
-        .form-message {
-            text-align: center;
-            padding: 12px;
-            border-radius: 8px;
-            margin-top: 10px;
-            display: none;
-        }
-
-        .form-message.success {
-            background: rgba(76, 184, 196, 0.3);
-            color: #4db8c4;
-            border: 1px solid #4db8c4;
-            display: block;
-        }
-
-        /* Music Player */
+        /* Music Player & Floating Buttons */
         .music-player {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
+            bottom: 20px; right: 20px;
             background: white;
             border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            width: 55px; height: 55px;
+            display: flex; align-items: center; justify-content: center;
             box-shadow: 0 5px 20px rgba(10, 123, 138, 0.3);
-            cursor: pointer;
-            z-index: 100;
-            transition: all 0.3s ease;
-            animation: bounce 1s ease-in-out infinite;
+            cursor: pointer; z-index: 100;
         }
 
-        .music-player:hover {
-            transform: scale(1.1);
-        }
+        .music-player.playing { background: var(--primary-teal); color: white; }
 
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        .music-player.playing {
-            animation: none;
-            background: var(--primary-teal);
-            color: white;
-        }
-
-        .music-player-hidden {
-            display: none;
-        }
-
-        /* Scroll to Top */
         .scroll-to-top {
             position: fixed;
-            bottom: 100px;
-            right: 20px;
-            width: 50px;
-            height: 50px;
+            bottom: 85px; right: 20px;
+            width: 45px; height: 45px;
             background: var(--primary-teal);
             color: white;
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            opacity: 0;
-            transition: all 0.3s ease;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; opacity: 0; transition: all 0.3s ease;
             z-index: 99;
-            box-shadow: 0 5px 15px rgba(10, 123, 138, 0.2);
         }
 
-        .scroll-to-top.show {
-            opacity: 1;
-        }
+        .scroll-to-top.show { opacity: 1; }
 
-        .scroll-to-top:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(10, 123, 138, 0.3);
-        }
-
-        /* Responsive */
-        @media (max-width: 600px) {
-            .container {
-                padding: 15px;
-            }
-
-            .hero {
-                padding: 30px 15px;
-            }
-
-            .couple-names {
-                font-size: 36px;
-            }
-
-            .countdown {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .carousel {
-                height: 280px;
-            }
-
-            .music-player {
-                width: 50px;
-                height: 50px;
-                bottom: 15px;
-                right: 15px;
-            }
-
-            .scroll-to-top {
-                width: 45px;
-                height: 45px;
-                bottom: 80px;
-                right: 15px;
-                font-size: 20px;
-            }
-        }
-
-        /* Dress Code Badge */
         .dress-code {
-            background: rgba(212, 175, 55, 0.2);
+            background: rgba(255, 255, 255, 0.85);
             border: 2px solid var(--primary-gold);
             color: var(--primary-teal);
-            padding: 15px;
-            border-radius: 10px;
-            text-align: center;
-            margin-bottom: 20px;
-            font-weight: 500;
-            letter-spacing: 1px;
+            padding: 15px; border-radius: 12px;
+            text-align: center; margin-bottom: 20px;
+            font-weight: 600; letter-spacing: 1px;
         }
 
-        /* Footer */
-        .footer {
-            text-align: center;
-            padding: 30px 20px;
-            color: var(--text-dark);
-            font-size: 13px;
-            margin-bottom: 100px;
-            animation: slideUp 0.8s ease-out 1.4s both;
-        }
-
-        .footer p {
-            margin-bottom: 10px;
-        }
-
-        .heart {
-            color: var(--primary-teal);
-            animation: heartbeat 1.5s ease-in-out infinite;
-        }
-
-        @keyframes heartbeat {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-        }
+        .footer { text-align: center; padding: 30px 20px; color: var(--text-dark); font-size: 13px; margin-bottom: 100px; }
     </style>
 </head>
 <body>
-    <!-- Animated Background -->
-    <div class="animated-bg"></div>
+
+    <div class="petals-container" id="petalsContainer"></div>
     <div class="bubbles" id="bubbles"></div>
 
-    <!-- Main Container -->
     <div class="container">
         <!-- Hero Section -->
         <section class="hero">
             <div class="hero-content">
                 <p class="subtitle">Together with parents</p>
-                <h1 class="couple-names">Tina & Ash</h1>
+                <h1 class="couple-names">Tiki & Amila</h1>
                 <div class="decorative-line"></div>
                 <p class="wedding-date">request the honour of your presence at the marriage of</p>
                 <p style="font-size: 16px; margin-top: 15px; letter-spacing: 1px;">
-                    <strong>Tina Suba</strong> and <strong>Ash Peters</strong>
+                    <strong>Tiki Subasinha</strong> and <strong>Amila Perera</strong>
                 </p>
-                <p class="wedding-date" style="margin-top: 20px;">Wednesday, the fifteenth of December<br>Two Thousand Twenty-Seven<br>at Holy Spirit Church, Wadduwa</p>
+                <p class="wedding-date" style="margin-top: 20px;">15th December, 2027<br>at Holy Spirit Church, Wadduwa</p>
             </div>
         </section>
 
         <!-- Countdown Timer -->
-        <section class="countdown-section">
+        <section class="pattern-card-section">
             <h2 class="countdown-title">Time Until the Big Day</h2>
             <div class="countdown">
                 <div class="countdown-item">
@@ -899,30 +598,30 @@
         </section>
 
         <!-- Schedule Section -->
-        <section class="schedule-section">
+        <section class="pattern-card-section">
             <h2 class="section-title">Schedule of Events</h2>
             <div class="timeline">
-                <div class="timeline-item" style="--item-index: 0;">
+                <div class="timeline-item">
                     <div class="timeline-time">9:30 AM</div>
                     <div class="timeline-event">Church Ceremony & Holy Mass</div>
                     <div class="timeline-venue">Holy Spirit Church, Wadduwa</div>
                 </div>
-                <div class="timeline-item" style="--item-index: 1;">
+                <div class="timeline-item">
                     <div class="timeline-time">12:30 PM</div>
                     <div class="timeline-event">Poruwa Ceremony</div>
                     <div class="timeline-venue">Galle Face Hotel, Colombo</div>
                 </div>
-                <div class="timeline-item" style="--item-index: 2;">
+                <div class="timeline-item">
                     <div class="timeline-time">1:00 PM</div>
                     <div class="timeline-event">Reception Begins</div>
                     <div class="timeline-venue">Galle Face Hotel, Colombo</div>
                 </div>
-                <div class="timeline-item" style="--item-index: 3;">
+                <div class="timeline-item">
                     <div class="timeline-time">2:00 PM</div>
                     <div class="timeline-event">Lunch & Cocktails</div>
                     <div class="timeline-venue">Dining Hall</div>
                 </div>
-                <div class="timeline-item" style="--item-index: 4;">
+                <div class="timeline-item">
                     <div class="timeline-time">4:00 PM</div>
                     <div class="timeline-event">Dancing & Live Music</div>
                     <div class="timeline-venue">Featuring 'The Doctor' Band</div>
@@ -931,7 +630,7 @@
         </section>
 
         <!-- Venue Details -->
-        <section class="venue-section">
+        <section class="pattern-card-section">
             <h2 class="section-title">Venues</h2>
             <div class="venue-grid">
                 <div class="venue-card church">
@@ -950,7 +649,7 @@
         </section>
 
         <!-- Special Features -->
-        <section class="features-section">
+        <section class="pattern-card-section">
             <h2 class="section-title">Special Touches</h2>
             <div class="feature-grid">
                 <div class="feature-item">
@@ -1054,8 +753,8 @@
         <!-- Footer -->
         <section class="footer">
             <p>Looking forward to celebrating with you!</p>
-            <p><span class="heart">❤</span> Tina & Ash <span class="heart">❤</span></p>
-            <p style="font-size: 12px; margin-top: 20px; color: var(--primary-light-blue);">
+            <p><span class="heart">❤</span> Tiki & Amila <span class="heart">❤</span></p>
+            <p style="font-size: 12px; margin-top: 15px; color: var(--primary-light-blue);">
                 A coastal celebration of love in Sri Lanka
             </p>
         </section>
@@ -1065,55 +764,65 @@
     <audio id="backgroundMusic" loop>
         <source src="https://raw.githubusercontent.com/manperera143/images/main/bensound-unbreakableresolve.mp3" type="audio/mpeg">
     </audio>
-    <div class="music-player" id="musicPlayer" title="Toggle Music">
-        🎵
-    </div>
-
-    <!-- Scroll to Top -->
+    <div class="music-player" id="musicPlayer" title="Toggle Music">🎵</div>
     <div class="scroll-to-top" id="scrollToTop">↑</div>
 
     <script>
-        // Generate Bubbles
-        function generateBubbles() {
-            const container = document.getElementById('bubbles');
-            for (let i = 0; i < 20; i++) {
-                const bubble = document.createElement('div');
-                bubble.className = 'bubble';
-                const size = Math.random() * 60 + 20;
-                bubble.style.width = size + 'px';
-                bubble.style.height = size + 'px';
-                bubble.style.left = Math.random() * 100 + '%';
-                bubble.style.bottom = Math.random() * -100 + 'px';
-                bubble.style.animationDuration = (Math.random() * 10 + 15) + 's';
-                bubble.style.animationDelay = Math.random() * 5 + 's';
-                container.appendChild(bubble);
+        // Generate Rose Petals
+        function generateRosePetals() {
+            const container = document.getElementById('petalsContainer');
+            function createPetal() {
+                const petal = document.createElement('div');
+                petal.className = 'petal';
+                const sizeWidth = Math.random() * 8 + 12;
+                petal.style.width = sizeWidth + 'px';
+                petal.style.height = (sizeWidth * 1.35) + 'px';
+                petal.style.left = Math.random() * 100 + 'vw';
+                petal.style.top = '-30px';
+                container.appendChild(petal);
+
+                const startTime = Date.now();
+                const duration = Math.random() * 5000 + 7000;
+                const startLeft = parseFloat(petal.style.left);
+                const leftDrift = (Math.random() - 0.5) * 120;
+                const maxRotation = Math.random() * 720 - 360;
+
+                function animate() {
+                    const elapsed = Date.now() - startTime;
+                    const progress = elapsed / duration;
+                    if (progress >= 1) { petal.remove(); return; }
+
+                    const newTop = -30 + (window.innerHeight + 60) * progress;
+                    const sway = Math.sin(progress * Math.PI * 4) * 20;
+                    const newLeft = startLeft + (leftDrift * progress) + sway;
+
+                    petal.style.top = newTop + 'px';
+                    petal.style.left = newLeft + 'vw';
+                    petal.style.transform = `rotate(${progress * maxRotation}deg)`;
+                    petal.style.opacity = progress < 0.1 ? progress * 8.5 : (progress > 0.8 ? (1 - progress) * 4.25 : '0.85');
+
+                    requestAnimationFrame(animate);
+                }
+                animate();
             }
+            setInterval(createPetal, 450);
         }
-        generateBubbles();
+        generateRosePetals();
 
         // Countdown Timer
         function updateCountdown() {
             const weddingDate = new Date('December 15, 2027 09:30:00').getTime();
-            
             function countdown() {
                 const now = new Date().getTime();
                 const distance = weddingDate - now;
 
                 if (distance > 0) {
-                    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-                    document.getElementById('days').textContent = days;
-                    document.getElementById('hours').textContent = hours;
-                    document.getElementById('minutes').textContent = minutes;
-                    document.getElementById('seconds').textContent = seconds;
-                } else {
-                    document.querySelector('.countdown-section').innerHTML = '<div style="text-align: center; color: #0a7b8a; font-weight: bold; font-size: 18px;">The celebration is here! 🎉</div>';
+                    document.getElementById('days').textContent = Math.floor(distance / (1000 * 60 * 60 * 24));
+                    document.getElementById('hours').textContent = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    document.getElementById('minutes').textContent = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    document.getElementById('seconds').textContent = Math.floor((distance % (1000 * 60)) / 1000);
                 }
             }
-
             countdown();
             setInterval(countdown, 1000);
         }
@@ -1122,95 +831,78 @@
         // Photo Carousel
         let currentSlide = 0;
         const slides = document.querySelectorAll('.carousel-slide');
-        const totalSlides = slides.length;
-
         function initCarousel() {
             const controls = document.getElementById('carouselControls');
-            for (let i = 0; i < totalSlides; i++) {
+            slides.forEach((_, i) => {
                 const dot = document.createElement('div');
                 dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
                 dot.onclick = () => goToSlide(i);
                 controls.appendChild(dot);
-            }
+            });
         }
-
         function goToSlide(n) {
-            currentSlide = n % totalSlides;
-            slides.forEach(slide => slide.classList.remove('active'));
-            document.querySelectorAll('.carousel-dot').forEach(dot => dot.classList.remove('active'));
+            currentSlide = n % slides.length;
+            slides.forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.carousel-dot').forEach(d => d.classList.remove('active'));
             slides[currentSlide].classList.add('active');
             document.querySelectorAll('.carousel-dot')[currentSlide].classList.add('active');
         }
-
-        function nextSlide() {
-            goToSlide(currentSlide + 1);
-        }
-
         initCarousel();
-        setInterval(nextSlide, 5000);
+        setInterval(() => goToSlide(currentSlide + 1), 5000);
 
-        // RSVP Form Handler
+        // RSVP Script
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbyB1MuULeCqjhslwpslAKIz_eR4uAeh-uezCLyDEI6DG7RG-5hIxmNLUgNVdahXyMx-/exec';
         document.getElementById('rsvpForm').addEventListener('submit', function(e) {
             e.preventDefault();
+            const submitBtn = document.querySelector('.rsvp-button');
+            const messageDiv = document.querySelector('.form-message');
             
+            submitBtn.textContent = 'Submitting...';
+            submitBtn.disabled = true;
+
             const formData = {
-                fullName: document.getElementById('fullName').value,
+                name: document.getElementById('fullName').value,
                 email: document.getElementById('email').value,
                 phone: document.getElementById('phone').value,
-                attendance: document.querySelector('input[name="attendance"]:checked').value,
+                attending: document.querySelector('input[name="attendance"]:checked').value,
                 guests: document.getElementById('guests').value,
                 dietary: document.getElementById('dietary').value,
                 songRequest: document.getElementById('songRequest').value,
-                message: document.getElementById('message').value,
-                timestamp: new Date().toLocaleString()
+                message: document.getElementById('message').value
             };
 
-            // Save to localStorage
-            let responses = JSON.parse(localStorage.getItem('weddingRSVP') || '[]');
-            responses.push(formData);
-            localStorage.setItem('weddingRSVP', JSON.stringify(responses));
-
-            // Show success message
-            const messageDiv = document.querySelector('.form-message');
-            messageDiv.textContent = '✓ Thank you! Your RSVP has been received. We look forward to celebrating with you!';
-            messageDiv.classList.add('success');
-            document.getElementById('rsvpForm').reset();
-
-            setTimeout(() => {
-                messageDiv.classList.remove('success');
-            }, 5000);
+            fetch(scriptURL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+            })
+            .then(() => {
+                messageDiv.textContent = '✓ Thank you! Your RSVP has been received. We look forward to celebrating with you!';
+                messageDiv.classList.add('success');
+                document.getElementById('rsvpForm').reset();
+                submitBtn.textContent = 'Submit RSVP';
+                submitBtn.disabled = false;
+            })
+            .catch(error => {
+                alert('There was an issue submitting your RSVP. Please try again.');
+                submitBtn.textContent = 'Submit RSVP';
+                submitBtn.disabled = false;
+            });
         });
 
-        // Music Player
+        // Audio & Scroll
         const audio = document.getElementById('backgroundMusic');
         const musicPlayer = document.getElementById('musicPlayer');
         let isPlaying = false;
-
         musicPlayer.addEventListener('click', function() {
-            if (isPlaying) {
-                audio.pause();
-                musicPlayer.classList.remove('playing');
-                isPlaying = false;
-            } else {
-                audio.play().catch(err => console.log('Audio play failed:', err));
-                musicPlayer.classList.add('playing');
-                isPlaying = true;
-            }
+            if (isPlaying) { audio.pause(); musicPlayer.classList.remove('playing'); isPlaying = false; }
+            else { audio.play(); musicPlayer.classList.add('playing'); isPlaying = true; }
         });
 
-        // Scroll to Top
         const scrollToTop = document.getElementById('scrollToTop');
-        window.addEventListener('scroll', function() {
-            if (window.pageYOffset > 300) {
-                scrollToTop.classList.add('show');
-            } else {
-                scrollToTop.classList.remove('show');
-            }
-        });
-
-        scrollToTop.addEventListener('click', function() {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
+        window.addEventListener('scroll', () => scrollToTop.classList.toggle('show', window.pageYOffset > 300));
+        scrollToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
     </script>
 </body>
 </html>
