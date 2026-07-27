@@ -199,34 +199,35 @@
             letter-spacing: 2px;
         }
 
-        .countdown {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-            text-align: center;
-        }
+        /* UPDATED CSS FOR PERFECT MOBILE FIT */
+.countdown {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px; /* Reduced gap so all 4 boxes fit easily */
+    text-align: center;
+}
 
-        .countdown-item {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 15px;
-            border-radius: 12px;
-            border: 1px solid rgba(212, 175, 55, 0.4);
-            box-shadow: 0 4px 12px rgba(10, 123, 138, 0.08);
-        }
+.countdown-item {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 10px 4px; /* Reduced side padding so text doesn't overflow */
+    border-radius: 12px;
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    box-shadow: 0 4px 12px rgba(10, 123, 138, 0.08);
+}
 
-        .countdown-number {
-            font-size: 24px;
-            font-weight: bold;
-            color: var(--primary-teal);
-            display: block;
-        }
+.countdown-number {
+    font-size: 20px; /* Slightly scaled down for mobile screens */
+    font-weight: bold;
+    color: var(--primary-teal);
+    display: block;
+}
 
-        .countdown-label {
-            font-size: 11px;
-            color: var(--text-dark);
-            text-transform: uppercase;
-            margin-top: 5px;
-        }
+.countdown-label {
+    font-size: 10px; /* Clean, clear size that won't wrap oddly */
+    color: var(--text-dark);
+    text-transform: uppercase;
+    margin-top: 4px;
+}
 
         /* Photo Carousel */
         .carousel-section {
